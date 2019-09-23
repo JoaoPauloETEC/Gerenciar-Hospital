@@ -33,6 +33,7 @@ var Hospital;
     Hospital.Pessoa = Pessoa;
 })(Hospital || (Hospital = {}));
 ///<reference path="Pessoa.ts"/>
+///<reference path="ISetor.ts"/>
 var Hospital;
 (function (Hospital) {
     var Paciente = /** @class */ (function (_super) {
@@ -51,6 +52,12 @@ var Hospital;
         };
         Paciente.prototype.getHospital = function () {
             return this._hospital;
+        };
+        Paciente.prototype.setSetor = function (setor) {
+            this._setor = setor;
+        };
+        Paciente.prototype.mostrarSetor = function () {
+            return this._setor;
         };
         return Paciente;
     }(Hospital.Pessoa));
@@ -94,6 +101,12 @@ var Hospital;
         Enfermeiro.prototype.getHospital = function () {
             return this._hospital;
         };
+        Enfermeiro.prototype.setSetor = function (setor) {
+            this._setor = setor;
+        };
+        Enfermeiro.prototype.mostrarSetor = function () {
+            return this._setor;
+        };
         return Enfermeiro;
     }(Hospital.Funcionario));
     Hospital.Enfermeiro = Enfermeiro;
@@ -135,6 +148,7 @@ var Hospital;
             this._enfermeiros = [];
             this._medicos = [];
             this._pacientes = [];
+            this._prontoSocorros = [];
         }
         Hospital.prototype.getNome = function () {
             return this._nome;
@@ -163,9 +177,36 @@ var Hospital;
         Hospital.prototype.addPaciente = function (paciente) {
             this._pacientes.push(paciente);
         };
+        Hospital.prototype.getProntoSocorro = function () {
+            return this._prontoSocorros;
+        };
+        Hospital.prototype.addProntoSocorro = function (ProntoSocorro) {
+            this._prontoSocorros.push(ProntoSocorro);
+        };
         return Hospital;
     }());
     Hospital_1.Hospital = Hospital;
+})(Hospital || (Hospital = {}));
+var Hospital;
+(function (Hospital) {
+    var ProntoSocorro = /** @class */ (function () {
+        function ProntoSocorro() {
+        }
+        ProntoSocorro.prototype.getCodProntoSocorro = function () {
+            return this._codProntoSocorro;
+        };
+        ProntoSocorro.prototype.setCodProntoSocorro = function (codigo) {
+            this._codProntoSocorro = codigo;
+        };
+        ProntoSocorro.prototype.setEndereco = function (endereco) {
+            this._endereco = endereco;
+        };
+        ProntoSocorro.prototype.getEndereco = function () {
+            return this._endereco;
+        };
+        return ProntoSocorro;
+    }());
+    Hospital.ProntoSocorro = ProntoSocorro;
 })(Hospital || (Hospital = {}));
 ///<reference path="Pessoa.ts"/>
 ///<reference path="Paciente.ts"/>
@@ -187,16 +228,19 @@ var Hospital;
     paciente.setNome('Pelé');
     paciente.setCPF('123.123.123-34');
     paciente.setHospital(hospital);
+    paciente.setSetor(24);
     var paciente2 = new Hospital.Paciente();
     paciente2.setCodPaciente(2);
     paciente2.setNome('Maradona');
     paciente2.setCPF('231.456.234-23');
     paciente2.setHospital(hospital2);
+    paciente2.setSetor(25);
     var paciente3 = new Hospital.Paciente();
     paciente3.setCodPaciente(3);
     paciente3.setNome('Mendonça');
     paciente3.setCPF('534.567.342-34');
     paciente3.setHospital(hospital);
+    paciente3.setSetor(34);
     //Enfermeiros
     var enfermeiro = new Hospital.Enfermeiro();
     enfermeiro.setCodFuncionario(1);
@@ -204,18 +248,21 @@ var Hospital;
     enfermeiro.setCPF('394.394.284-96');
     enfermeiro.setCoren(273485);
     enfermeiro.setHospital(hospital2);
+    enfermeiro.setSetor(25);
     var enfermeiro2 = new Hospital.Enfermeiro();
     enfermeiro2.setCodFuncionario(2);
     enfermeiro2.setNome('Jezabel');
     enfermeiro2.setCPF('435.592.059-23');
     enfermeiro2.setCoren(273485);
     enfermeiro2.setHospital(hospital);
+    enfermeiro2.setSetor(24);
     var enfermeiro3 = new Hospital.Enfermeiro();
     enfermeiro3.setCodFuncionario(2);
     enfermeiro3.setNome('Ingrid');
     enfermeiro3.setCPF('567.897.879-76');
     enfermeiro3.setCoren(273485);
     enfermeiro3.setHospital(hospital);
+    enfermeiro3.setSetor(34);
     //Médicos
     var medico = new Hospital.Medico();
     medico.setCodFuncionario(1);
@@ -252,18 +299,21 @@ var Hospital;
     hospital.addMedico(medico);
     hospital.addMedico(medico2);
     hospital.addMedico(medico3);
+    //Paciente
     var tabPaciente = document.getElementById('paciente');
-    var conteudo = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> </tr>";
+    var conteudo = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Setor</td> </tr>";
     hospital.getPacientes().forEach(function (element) {
-        conteudo += "<tr> <td>" + element.getHospital().getNome() + "</td> <td>" + element.getCodPaciente() + "</td> <td>" + element.getNome() + "</td> <td>" + element.getCPF() + "</td> </tr>";
+        conteudo += "<tr> <td>" + element.getHospital().getNome() + "</td> <td>" + element.getCodPaciente() + "</td> <td>" + element.getNome() + "</td> <td>" + element.getCPF() + "</td> <td>" + element.mostrarSetor() + "</td> </tr>";
     });
     tabPaciente.innerHTML = conteudo;
+    //Enfermeiro
     var tabEnfermeiro = document.getElementById('enfermeiro');
-    var conteudo2 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Coren</td>  </tr>";
+    var conteudo2 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Coren</td> <td>Setor</td>  </tr>";
     hospital.getEnfermeiros().forEach(function (element) {
-        conteudo2 += "<tr> <td>" + element.getHospital().getNome() + "</td> <td>" + element.getCodFuncionario() + "</td> <td>" + element.getNome() + "</td> <td>" + element.getCPF() + "</td> <td>" + element.getCoren() + "</td> </tr>";
+        conteudo2 += "<tr> <td>" + element.getHospital().getNome() + "</td> <td>" + element.getCodFuncionario() + "</td> <td>" + element.getNome() + "</td> <td>" + element.getCPF() + "</td> <td>" + element.getCoren() + "</td> <td>" + element.mostrarSetor() + "</td> </tr>";
     });
     tabEnfermeiro.innerHTML = conteudo2;
+    //Médico
     var tabMedico = document.getElementById('medico');
     var conteudo3 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>CRM</td> <td>Especialidade</td> </tr>";
     hospital.getMedicos().forEach(function (element) {

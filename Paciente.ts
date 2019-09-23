@@ -1,8 +1,10 @@
 ///<reference path="Pessoa.ts"/>
+///<reference path="ISetor.ts"/>
 namespace Hospital{
-    export class Paciente extends Pessoa{
+    export class Paciente extends Pessoa implements ISetor{
         private _codPaciente:number;
         private _hospital:Hospital;
+        private _setor:number;
 
         public getCodPaciente(){
             return this._codPaciente;
@@ -16,6 +18,13 @@ namespace Hospital{
         }
         public getHospital(){
             return this._hospital;
+        }
+
+        public setSetor(setor:number){
+            this._setor = setor;
+        }
+        public mostrarSetor(){
+            return this._setor;
         }
     }
 }

@@ -20,16 +20,21 @@ namespace Hospital{
     paciente.setNome('Pelé');
     paciente.setCPF('123.123.123-34');
     paciente.setHospital(hospital);
+    paciente.setSetor(24);
+
     let paciente2 = new Paciente();
     paciente2.setCodPaciente(2);
     paciente2.setNome('Maradona');
     paciente2.setCPF('231.456.234-23');
     paciente2.setHospital(hospital2);
+    paciente2.setSetor(25);
+
     let paciente3 = new Paciente();
     paciente3.setCodPaciente(3);
     paciente3.setNome('Mendonça');
     paciente3.setCPF('534.567.342-34');
     paciente3.setHospital(hospital);
+    paciente3.setSetor(34);
 
     //Enfermeiros
     let enfermeiro = new Enfermeiro();
@@ -38,18 +43,21 @@ namespace Hospital{
     enfermeiro.setCPF('394.394.284-96');
     enfermeiro.setCoren(273485);
     enfermeiro.setHospital(hospital2);
+    enfermeiro.setSetor(25);
     let enfermeiro2 = new Enfermeiro();
     enfermeiro2.setCodFuncionario(2);
     enfermeiro2.setNome('Jezabel');
     enfermeiro2.setCPF('435.592.059-23');
     enfermeiro2.setCoren(273485);
     enfermeiro2.setHospital(hospital);
+    enfermeiro2.setSetor(24);
     let enfermeiro3 = new Enfermeiro();
     enfermeiro3.setCodFuncionario(2);
     enfermeiro3.setNome('Ingrid');
     enfermeiro3.setCPF('567.897.879-76');
     enfermeiro3.setCoren(273485);
     enfermeiro3.setHospital(hospital);
+    enfermeiro3.setSetor(34);
 
     //Médicos
     let medico = new Medico();
@@ -92,26 +100,29 @@ namespace Hospital{
     hospital.addMedico(medico2);
     hospital.addMedico(medico3);
 
+    //Paciente
     let tabPaciente = document.getElementById('paciente');
 
-    let conteudo = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> </tr>";
+    let conteudo = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Setor</td> </tr>";
 
     hospital.getPacientes().forEach(element => {
-        conteudo += "<tr> <td>"+element.getHospital().getNome()+"</td> <td>"+element.getCodPaciente()+"</td> <td>"+element.getNome()+"</td> <td>"+element.getCPF()+"</td> </tr>";
+        conteudo += "<tr> <td>"+element.getHospital().getNome()+"</td> <td>"+element.getCodPaciente()+"</td> <td>"+element.getNome()+"</td> <td>"+element.getCPF()+"</td> <td>"+element.mostrarSetor()+"</td> </tr>";
     })
 
     tabPaciente.innerHTML = conteudo;
 
+    //Enfermeiro
     let tabEnfermeiro = document.getElementById('enfermeiro');
 
-    let conteudo2 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Coren</td>  </tr>";
+    let conteudo2 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>Coren</td> <td>Setor</td>  </tr>";
 
     hospital.getEnfermeiros().forEach(element => {
-        conteudo2 += "<tr> <td>"+element.getHospital().getNome()+"</td> <td>"+element.getCodFuncionario()+"</td> <td>"+element.getNome()+"</td> <td>"+element.getCPF()+"</td> <td>"+element.getCoren()+"</td> </tr>";
+        conteudo2 += "<tr> <td>"+element.getHospital().getNome()+"</td> <td>"+element.getCodFuncionario()+"</td> <td>"+element.getNome()+"</td> <td>"+element.getCPF()+"</td> <td>"+element.getCoren()+"</td> <td>"+element.mostrarSetor()+"</td> </tr>";
     })
 
     tabEnfermeiro.innerHTML = conteudo2;
 
+    //Médico
     let tabMedico = document.getElementById('medico');
 
     let conteudo3 = "<tr> <td>Hospital</td> <td>Código</td> <td>Nome</td> <td>CPF</td> <td>CRM</td> <td>Especialidade</td> </tr>";

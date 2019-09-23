@@ -4,6 +4,7 @@ namespace Hospital{
         private _enfermeiros:Array<Enfermeiro> = [];
         private _medicos:Array<Medico> = [];
         private _pacientes:Array<Paciente> = [];
+        private _prontoSocorros:Array<ProntoSocorro> = [];
 
         public getNome(){
             return this._nome;
@@ -35,5 +36,13 @@ namespace Hospital{
         public addPaciente(paciente:Paciente){
             this._pacientes.push(paciente);
         }
+
+        public getProntoSocorro(){
+            return this._prontoSocorros;
+        }
+        public addProntoSocorro(ProntoSocorro:ProntoSocorro){
+            this._prontoSocorros.push(ProntoSocorro);
+        }
+
     }
 }
